@@ -36,15 +36,16 @@ import java.io.File;
  * 
  * @author jon
  */
-@SuppressWarnings({"squid:S106", "squid:S1118"}) // using StdOut if fine in an example
+@SuppressWarnings({ "squid:S106", "squid:S1118" }) // using StdOut if fine in an
+													// example
 public class MemoryPool {
 
 	public static void main(String[] args) throws Exception {
-		Injector injector = JmxTransModule.createInjector(new JmxTransConfiguration());
+		JmxTransConfiguration config = new JmxTransConfiguration();
+		config.setJsonFile(new File(MemoryPool.class.getClassLoader().getResource("memorypool.json").getFile()));
+		Injector injector = JmxTransModule.createInjector(config);
 		JsonUtils jsonUtils = injector.getInstance(JsonUtils.class);
-		JmxProcess process = jsonUtils.parseProcess(new File("memorypool.json"));
-		new JsonPrinter(System.out).print(process);
 		JmxTransformer transformer = injector.getInstance(JmxTransformer.class);
-		transformer.executeStandalone(process);
+		transformer.executeStandalone();
 	}
 }

@@ -301,12 +301,10 @@ public class JmxTransformer implements WatchedCallback {
 	/**
 	 * Handy method which runs the JmxProcess
 	 */
-	public void executeStandalone(JmxProcess process) throws Exception {
-		this.masterServersList = process.getServers();
-
+	public void executeStandalone() throws Exception {
 		this.serverScheduler.start();
 
-		this.processServersIntoJobs();
+		this.startupSystem();
 
 		// Sleep for 10 seconds to wait for jobs to complete.
 		// There should be a better way, but it seems that way isn't working

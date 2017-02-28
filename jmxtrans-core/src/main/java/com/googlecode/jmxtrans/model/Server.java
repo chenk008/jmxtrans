@@ -557,4 +557,10 @@ public class Server implements JmxConnectionProvider {
 		}
 	}
 
+	@Override
+	public boolean isLocal() {
+		// TODO Auto-generated method stub
+		return false;
+	}
+
 }
